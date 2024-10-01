@@ -66,7 +66,7 @@ function createProductCard(product) {
         <p>Selling Price: $${product.sellingPrice.toFixed(2)}</p>
         <p>Quantity: <span class="product-quantity">${product.quantity}</span></p>
         
-        <input type="number" min="0" placeholder="Enter Quantity" class="quantity-input p-1 border rounded"/>
+        <input type="number" min="0" placeholder="Enter Quantity" class="w-full quantity-input p-1 border rounded"/>
         <div class="button-group mt-2">
             <button class="bg-green-500 text-white p-2 rounded sell-button mr-2">Sell</button>
             <button class="bg-blue-500 text-white p-2 rounded update-button">Update</button>
