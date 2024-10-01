@@ -1,3 +1,5 @@
+
+showSection('home');
 // Global Variables
 let totalPurchase = 0;
 let totalSelling = 0;
