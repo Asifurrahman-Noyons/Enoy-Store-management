@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center h-screen">
+    <div class="bg-white shadow-md rounded px-8 py-6 max-w-sm w-full">
+        <h2 class="text-center text-2xl font-bold mb-6">Login</h2>
+        <form onsubmit="event.preventDefault(); validateLogin();">
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password"
+                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Login
+                </button>
+            </div>
+        </form>
+    </div>
+
+
+    <script>
+        // Function to check if the user is already logged in
+        function checkLogin() {
+            const storedUsername = localStorage.getItem('username');
+            const storedPassword = localStorage.getItem('password');
+            if (storedUsername && storedPassword) {
+                window.location.href = 'content.html'; // Redirect to content page if already logged in
+            }
+        }
+
+        function validateLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === 'admin' && password === 'password') {
+                localStorage.setItem('username', username);
+                localStorage.setItem('password', password);
+                window.location.href = 'inventory.html'; // Redirect to content page
+            } else {
+                alert('Invalid credentials! Please try again.');
+            }
+        }
+
+        // Check login status when the page loads
+        window.onload = checkLogin;
+    </script>
+</body>
+
+</html>
