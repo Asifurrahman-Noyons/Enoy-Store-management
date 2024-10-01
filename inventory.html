@@ -8,46 +8,74 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <title>Inventory Management System</title>
     <style>
+    
+    a {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+    
       .nav-item {
-            position: relative;
-            text-align: center;
-            padding: 10px;
-            transition: color 0.3s ease;
-        }
+    position: relative;
+    text-align: center;
+    transition: color 0.3s ease, transform 0.3s ease;
+    padding: 0px; /* Add padding for better touch targets */
+}
 
-        .nav-item i {
-            transition: background-color 0.3s ease, color 0.3s ease;
-            border-radius: 50%; /* Rounded icon background */
-            padding: 10px; /* Padding around the icon */
-        }
+.nav-item i {
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border-radius: 50%;
+    padding: 10px;
+    background-color: transparent; /* Default background */
+}
 
-        .nav-item.active i {
-            background-color: rgba(59, 130, 246, 0.2); /* Background shade when icon is active */
-            color: #3b82f6; /* Change the icon color when active */
-        }
+.nav-item.active i {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+}
 
-        .nav-item span {
-            display: block;
-            font-size: 12px;
-            color: #888; /* Default text color */
-        }
+.nav-item span {
+    display: block;
+    font-size: 12px;
+    color: #888;
+    transition: color 0.3s ease; /* Smooth color transition */
+}
 
-        .nav-item.active span {
-            color: #3b82f6; /* Change text color when active */
-        }
+.nav-item.active span {
+    color: #3b82f6;
+}
+
+.nav-item:hover {
+    color: #3b82f6; /* Change text color on hover */
+    transform: translateY(-2px); /* Subtle lift effect on hover */
+}
+
+.nav-item:hover i {
+    background-color: rgba(59, 130, 246, 0.1); /* Light background on hover */
+}
+
+.nav-item:hover span {
+    color: #3b82f6; /* Change span color on hover */
+}
     </style>
 </head>
 
 <body class="bg-gray-100 flex flex-col min-h-screen">
 
-    <div id="content" class="flex-1 p-4">
+    <div id="content" class="flex-1 p-4 mb-24">
         <!-- Home Page -->
-        <div id="home" class="hidden mb-6">
-            <h2 class="text-xl font-semibold mb-2">Products</h2>
-            <div id="productCards" class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-            <button onclick="logout()" class="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+        <div id="home" class="hidden">
+            <h2 class="text-2xl font-semibold mb-4">Products</h2>
+
+            <!-- Search Input -->
+            <input type="text" id="searchInput" placeholder="Search Products..." class="border p-2 w-full mb-4 rounded">
+
+            <div id="productCards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <button onclick="logout()" class="mt-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                 Logout
             </button>
+
+            <!-- Reset Button -->
+            <button id="resetButton" class="bg-red-500 text-white p-2 rounded mt-4 hover:bg-red-700">Reset Data</button>
         </div>
 
         <!-- Dashboard -->
@@ -87,12 +115,9 @@
             <form id="productForm" class="space-y-4">
                 <input type="text" id="productName" placeholder="Product Name" class="border p-2 w-full" required>
                 <input type="file" id="productImage" accept="image/*" class="border p-2 w-full" required>
-                <input type="number" id="productPurchasePrice" placeholder="Purchase Price" class="border p-2 w-full"
-                    required min="0" step="0.01">
-                <input type="number" id="productSellingPrice" placeholder="Selling Price" class="border p-2 w-full" required
-                    min="0" step="0.01">
-                <input type="number" id="productQuantity" placeholder="Total Quantity" class="border p-2 w-full" required
-                    min="1">
+                <input type="number" id="productPurchasePrice" placeholder="Purchase Price" class="border p-2 w-full" required min="0" step="0.01">
+                <input type="number" id="productSellingPrice" placeholder="Selling Price" class="border p-2 w-full" required min="0" step="0.01">
+                <input type="number" id="productQuantity" placeholder="Total Quantity" class="border p-2 w-full" required min="1">
                 <button type="submit" class="bg-blue-500 text-white p-2 w-full rounded">Add Product</button>
             </form>
         </div>
@@ -105,7 +130,7 @@
                     <tr class="bg-gray-200">
                         <th class="py-2 px-4 border">Name</th>
                         <th class="py-2 px-4 border">Sold</th>
-                        <th class="py-2 px-4 border">sale</th>
+                        <th class="py-2 px-4 border">Sale</th>
                         <th class="py-2 px-4 border">Profit</th>
                         <th class="py-2 px-4 border">Date</th>
                     </tr>
@@ -116,7 +141,7 @@
     </div>
 
     <!-- Bottom Navigation -->
-    <div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg rounded-t-2xl">
+    <div class="fixed bottom-0 left-0 right-0 bg-white shadow-lg rounded-t-2xl border-t border-gray-200">
         <div class="flex justify-around py-4">
             <a href="#" class="flex flex-col items-center text-gray-600 nav-item" onclick="showSection('home')">
                 <i class="fas fa-home text-2xl"></i>
@@ -141,7 +166,5 @@
 </body>
 
 </html>
-
-
 
 
