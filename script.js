@@ -1,4 +1,3 @@
-
 showSection('home');
 // Global Variables
 let totalPurchase = 0;
@@ -84,23 +83,25 @@ document.getElementById('productForm').addEventListener('submit', function (even
 
 // Function to create a product card
 function createProductCard(product) {
-    const productCard = document.createElement('div');
-    productCard.className = 'product-card p-4 bg-white rounded-lg shadow-md';
+      const productCard = document.createElement('div');
+      productCard.className = 'product-card p-4 bg-white rounded-lg shadow-md';
+    
+      productCard.innerHTML = `
+            <img src="${product.image}" alt="${product.name}" class="w-full h-32 rounded mb-2">
+            <h3 class="font-bold">${product.name}</h3>
+            <p>Purchase Price: $${product.purchasePrice.toFixed(2)}</p>
+            <p>Selling Price: $${product.sellingPrice.toFixed(2)}</p>
+            <p>Quantity: <span class="product-quantity">${product.quantity}</span></p>
+            <input type="number" min="0" placeholder="Enter Quantity" class="w-full quantity-input p-1 border rounded" />
+            <div class="button-group mt-2">
+                <button class="bg-green-500 text-white p-2 rounded sell-button mr-2">Sell</button>
+                <button class="bg-blue-500 text-white p-2 rounded update-button">Update</button>
+            </div>
+        `;
+    
+      document.getElementById('productCards').appendChild(productCard);
+      // Add event listeners for sell and update buttons...
 
-    productCard.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" class="w-full h-32 rounded mb-2">
-        <h3 class="font-bold">${product.name}</h3>
-        <p>Purchase Price: $${product.purchasePrice.toFixed(2)}</p>
-        <p>Selling Price: $${product.sellingPrice.toFixed(2)}</p>
-        <p>Quantity: <span class="product-quantity">${product.quantity}</span></p>
-        <input type="number" min="0" placeholder="Enter Quantity" class="w-full quantity-input p-1 border rounded" />
-        <div class="button-group mt-2">
-            <button class="bg-green-500 text-white p-2 rounded sell-button mr-2">Sell</button>
-            <button class="bg-blue-500 text-white p-2 rounded update-button">Update</button>
-        </div>
-    `;
-
-    document.getElementById('productCards').appendChild(productCard);
 
     const quantityElement = productCard.querySelector('.product-quantity');
     const quantityInput = productCard.querySelector('.quantity-input');
